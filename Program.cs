@@ -15,7 +15,8 @@ namespace AddressBook
                 Console.WriteLine("1. Add Person");
                 Console.WriteLine("2. View Address Book");
                 Console.WriteLine("3. Edit Contact");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("4. Delete Contact");
+                Console.WriteLine("5. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -30,6 +31,9 @@ namespace AddressBook
                         addressBook.EditContact();
                         break;
                     case 4:
+                        addressBook.DeleteContact();
+                        break;
+                    case 5:
                         Environment.Exit(0);
                         break;
                     default:

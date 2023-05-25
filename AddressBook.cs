@@ -91,7 +91,26 @@ namespace AddressBook
             }
             Console.WriteLine();
         }
-        private Contact FindContactByName(string firstName, string lastName)
+        public void DeleteContact()
+        {
+            Console.WriteLine("Enter the name of the contact to delete:");
+            Console.Write("First Name: ");
+            string firstName = Console.ReadLine();
+            Console.Write("Last Name: ");
+            string lastName = Console.ReadLine();
+            Contact contact = FindContactByName(firstName, lastName);
+            if (contact != null)
+            {
+                contacts.Remove(contact);
+                Console.WriteLine("Contact deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Contact not found.");
+            }
+            Console.WriteLine();
+        }
+            private Contact FindContactByName(string firstName, string lastName)
         {
             return contacts.Find(c => c.FirstName == firstName && c.LastName == lastName);
         }
