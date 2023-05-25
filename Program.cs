@@ -8,32 +8,36 @@ namespace AddressBook
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome Address Book");
-            AddressBook addressBook = new AddressBook();
+            AddressBookSystem addressBookSystem = new AddressBookSystem();
             while (true)
             {
-                Console.WriteLine("Address Book Menu:");
-                Console.WriteLine("1. Add Person");
-                Console.WriteLine("2. View Address Book");
-                Console.WriteLine("3. Edit Contact");
-                Console.WriteLine("4. Delete Contact");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("Address Book System Menu:");
+                Console.WriteLine("1. Create Address Book");
+                Console.WriteLine("2. Add Contact");
+                Console.WriteLine("3. View Address Book");
+                Console.WriteLine("4. Edit Contact");
+                Console.WriteLine("5. Delete Contact");
+                Console.WriteLine("6. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        addressBook.AddContacts();
+                        addressBookSystem.CreateAddressBook();
                         break;
                     case 2:
-                        addressBook.ViewAddressBook();
+                        addressBookSystem.AddContact();
                         break;
                     case 3:
-                        addressBook.EditContact();
+                        addressBookSystem.ViewAddressBook();
                         break;
                     case 4:
-                        addressBook.DeleteContact();
+                        addressBookSystem.EditContact();
                         break;
                     case 5:
+                        addressBookSystem.DeleteContact();
+                        break;
+                    case 6:
                         Environment.Exit(0);
                         break;
                     default:
