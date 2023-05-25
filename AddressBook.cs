@@ -39,6 +39,19 @@ namespace AddressBook
             Console.WriteLine("Contact added to the address book.");
             Console.WriteLine();
         }
+
+        public void AddContacts()
+        {
+            Console.Write("Enter the number of contacts to add: ");
+            int count = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Enter details for Contact #{i + 1}:");
+                AddContact();
+            }
+        }
+
         public void ViewAddressBook()
         {
             if (contacts.Count == 0)

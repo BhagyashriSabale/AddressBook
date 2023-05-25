@@ -22,7 +22,7 @@ namespace AddressBook
                 switch (choice)
                 {
                     case 1:
-                        addressBook.AddContact();
+                        addressBook.AddContacts();
                         break;
                     case 2:
                         addressBook.ViewAddressBook();
