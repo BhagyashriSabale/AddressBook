@@ -9,10 +9,14 @@ namespace AddressBook
     internal class AddressBookSystem
     {
         private Dictionary<string, AddressBook> addressBooks;
+        private Dictionary<string, List<Contact>> personsByCity;
+        private Dictionary<string, List<Contact>> personsByState;
 
         public AddressBookSystem()
         {
             addressBooks = new Dictionary<string, AddressBook>();
+            personsByCity = new Dictionary<string, List<Contact>>();
+            personsByState = new Dictionary<string, List<Contact>>();
         }
         public void CreateAddressBook()
         {
@@ -160,6 +164,78 @@ namespace AddressBook
             }
 
             Console.WriteLine();
+        }
+        public void ViewPersonsByCity()
+        {
+            Console.Write("Enter the city to view persons: ");
+            string city = Console.ReadLine();
+
+            if (personsByCity.ContainsKey(city))
+            {
+                List<Contact> persons = personsByCity[city];
+
+                Console.WriteLine($"Persons in {city} ({persons.Count}):");
+                foreach (var person in persons)
+                {
+                    Console.WriteLine($"Name: {person.FirstName} {person.LastName}");
+                    Console.WriteLine($"Address: {person.Address}");
+                    Console.WriteLine($"City: {person.City}");
+                    Console.WriteLine($"State: {person.State}");
+                    Console.WriteLine($"ZIP: {person.Zip}");
+                    Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+                    Console.WriteLine($"Email: {person.Email}");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No persons found in the specified city.");
+            }
+
+            Console.WriteLine();
+        }
+        public void ViewPersonsByState()
+        {
+            Console.Write("Enter the state to view persons: ");
+            string state = Console.ReadLine();
+
+            if (personsByState.ContainsKey(state))
+            {
+                List<Contact> persons = personsByState[state];
+
+                Console.WriteLine($"Persons in {state} ({persons.Count}):");
+                foreach (var person in persons)
+                {
+                    Console.WriteLine($"Name: {person.FirstName} {person.LastName}");
+                    Console.WriteLine($"Address: {person.Address}");
+                    Console.WriteLine($"City: {person.City}");
+                    Console.WriteLine($"State: {person.State}");
+                    Console.WriteLine($"ZIP: {person.Zip}");
+                    Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+                    Console.WriteLine($"Email: {person.Email}");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No persons found in the specified state.");
+            }
+
+            Console.WriteLine();
+        }
+        private void UpdatePersonsByCityAndState(Contact contact)
+        {
+            if (!personsByCity.ContainsKey(contact.City))
+            {
+                personsByCity[contact.City] = new List<Contact>();
+            }
+            personsByCity[contact.City].Add(contact);
+
+            if (!personsByState.ContainsKey(contact.State))
+            {
+                personsByState[contact.State] = new List<Contact>();
+            }
+            personsByState[contact.State].Add(contact);
         }
     }
 }
