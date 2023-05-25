@@ -115,6 +115,12 @@ namespace AddressBook
             }
             Console.WriteLine();
         }
+        public List<Contact> FindContactsByCityOrState(string searchQuery)
+        {
+            return contacts.Where(c => c.City.Equals(searchQuery, StringComparison.OrdinalIgnoreCase) ||
+                                       c.State.Equals(searchQuery, StringComparison.OrdinalIgnoreCase))
+                           .ToList();
+        }
         public Contact FindContactByName(string firstName, string lastName)
         {
             return contacts.Find(c => c.FirstName == firstName && c.LastName == lastName);

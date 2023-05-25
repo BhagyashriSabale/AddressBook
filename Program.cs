@@ -17,7 +17,8 @@ namespace AddressBook
                 Console.WriteLine("3. View Address Book");
                 Console.WriteLine("4. Edit Contact");
                 Console.WriteLine("5. Delete Contact");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Search Person in City or State");
+                Console.WriteLine("7. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -38,6 +39,9 @@ namespace AddressBook
                         addressBookSystem.DeleteContact();
                         break;
                     case 6:
+                        addressBookSystem.SearchPersonInCityOrState();
+                        break;
+                    case 7:
                         Environment.Exit(0);
                         break;
                     default:
