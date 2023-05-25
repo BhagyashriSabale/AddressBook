@@ -59,5 +59,41 @@ namespace AddressBook
                 }
             }
         }
+        public void EditContact()
+        {
+            Console.WriteLine("Enter the name of the contact to edit:");
+            Console.Write("First Name: ");
+            string firstName = Console.ReadLine();
+            Console.Write("Last Name: ");
+            string lastName = Console.ReadLine();
+            Contact contact = FindContactByName(firstName, lastName);
+            if (contact != null)
+            {
+                Console.WriteLine("Enter new contact details:");
+                Console.Write("Address: ");
+                contact.Address = Console.ReadLine();
+                Console.Write("City: ");
+                contact.City = Console.ReadLine();
+                Console.Write("State: ");
+                contact.State = Console.ReadLine();
+                Console.Write("ZIP: ");
+                contact.Zip = Console.ReadLine();
+                Console.Write("Phone Number: ");
+                contact.PhoneNumber = Console.ReadLine();
+                Console.Write("Email: ");
+                contact.Email = Console.ReadLine();
+
+                Console.WriteLine("Contact details updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Contact not found.");
+            }
+            Console.WriteLine();
+        }
+        private Contact FindContactByName(string firstName, string lastName)
+        {
+            return contacts.Find(c => c.FirstName == firstName && c.LastName == lastName);
+        }
     }
 }
