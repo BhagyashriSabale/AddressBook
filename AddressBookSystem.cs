@@ -40,7 +40,35 @@ namespace AddressBook
             if (addressBooks.ContainsKey(addressBookName))
             {
                 AddressBook addressBook = addressBooks[addressBookName];
-                addressBook.AddContact();
+
+                Console.WriteLine("Enter contact details:");
+                Console.Write("First Name: ");
+                string firstName = Console.ReadLine();
+                Console.Write("Last Name: ");
+                string lastName = Console.ReadLine();
+                if (addressBook.FindContactByName(firstName, lastName) != null)
+                {
+                    Console.WriteLine("Contact with the same name already exists in the address book.");
+                }
+                else
+                {
+                    Console.Write("Address: ");
+                    string address = Console.ReadLine();
+                    Console.Write("City: ");
+                    string city = Console.ReadLine();
+                    Console.Write("State: ");
+                    string state = Console.ReadLine();
+                    Console.Write("ZIP: ");
+                    string zip = Console.ReadLine();
+                    Console.Write("Phone Number: ");
+                    string phoneNumber = Console.ReadLine();
+                    Console.Write("Email: ");
+                    string email = Console.ReadLine();
+                    Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                    addressBook.AddContact(contact);
+
+                    Console.WriteLine("Contact added to the address book.");
+                }
             }
             else
             {

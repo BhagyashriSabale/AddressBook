@@ -14,6 +14,10 @@ namespace AddressBook
         {
             contacts = new List<Contact>();
         }
+        public void AddContact(Contact contact)
+        {
+            contacts.Add(contact);
+        }
         public void AddContact()
         {
             Console.WriteLine("Enter contact details:");
@@ -38,18 +42,6 @@ namespace AddressBook
 
             Console.WriteLine("Contact added to the address book.");
             Console.WriteLine();
-        }
-
-        public void AddContacts()
-        {
-            Console.Write("Enter the number of contacts to add: ");
-            int count = Convert.ToInt32(Console.ReadLine());
-
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine($"Enter details for Contact #{i + 1}:");
-                AddContact();
-            }
         }
 
         public void ViewAddressBook()
@@ -123,7 +115,7 @@ namespace AddressBook
             }
             Console.WriteLine();
         }
-            private Contact FindContactByName(string firstName, string lastName)
+        public Contact FindContactByName(string firstName, string lastName)
         {
             return contacts.Find(c => c.FirstName == firstName && c.LastName == lastName);
         }
