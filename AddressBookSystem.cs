@@ -223,6 +223,30 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+        public void GetCountByCity()
+        {
+            var cityCounts = personsByCity.ToDictionary(kv => kv.Key, kv => kv.Value.Count);
+
+            Console.WriteLine("Number of persons by city:");
+            foreach (var kvp in cityCounts)
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            }
+
+            Console.WriteLine();
+        }
+        public void GetCountByState()
+        {
+            var stateCounts = personsByState.ToDictionary(kv => kv.Key, kv => kv.Value.Count);
+
+            Console.WriteLine("Number of persons by state:");
+            foreach (var kvp in stateCounts)
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            }
+
+            Console.WriteLine();
+        }
         private void UpdatePersonsByCityAndState(Contact contact)
         {
             if (!personsByCity.ContainsKey(contact.City))

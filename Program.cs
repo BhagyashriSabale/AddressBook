@@ -20,7 +20,9 @@ namespace AddressBook
                 Console.WriteLine("6. Search Person in City or State");
                 Console.WriteLine("7. View Persons by City");
                 Console.WriteLine("8. View Persons by State");
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("9. Get Count by City");
+                Console.WriteLine("10. Get Count by State");
+                Console.WriteLine("11. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -50,6 +52,12 @@ namespace AddressBook
                         addressBookSystem.ViewPersonsByState();
                         break;
                     case 9:
+                        addressBookSystem.GetCountByCity();
+                        break;
+                    case 10:
+                        addressBookSystem.GetCountByState();
+                        break;
+                    case 11:
                         Environment.Exit(0);
                         break;
                     default:

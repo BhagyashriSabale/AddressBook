@@ -117,13 +117,16 @@ namespace AddressBook
         }
         public List<Contact> FindContactsByCityOrState(string searchQuery)
         {
-            return contacts.Where(c => c.City.Equals(searchQuery, StringComparison.OrdinalIgnoreCase) ||
-                                       c.State.Equals(searchQuery, StringComparison.OrdinalIgnoreCase))
-                           .ToList();
+            return contacts.Where(contact =>
+                contact.City.Equals(searchQuery, StringComparison.OrdinalIgnoreCase) ||
+                contact.State.Equals(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
         }
+
         public Contact FindContactByName(string firstName, string lastName)
         {
-            return contacts.Find(c => c.FirstName == firstName && c.LastName == lastName);
+            return contacts.FirstOrDefault(contact =>
+                contact.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                contact.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
