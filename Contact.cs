@@ -27,5 +27,9 @@ namespace AddressBook
             PhoneNumber = phoneNumber;
             Email = email;
         }
+        public override string ToString()
+        {
+            return $"Name: {FirstName} {LastName}\nAddress: {Address}\nCity: {City}\nState: {State}\nZIP: {Zip}\nPhone Number: {PhoneNumber}\nEmail: {Email}";
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace AddressBook
             Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
             contacts.Add(contact);
 
-            Console.WriteLine("Contact added to the address book.");
+            Console.WriteLine("Contact added to the address book successfully.");
             Console.WriteLine();
         }
 
@@ -115,18 +115,54 @@ namespace AddressBook
             }
             Console.WriteLine();
         }
-        public List<Contact> FindContactsByCityOrState(string searchQuery)
+        public void AddMultiplePersons()
         {
-            return contacts.Where(contact =>
-                contact.City.Equals(searchQuery, StringComparison.OrdinalIgnoreCase) ||
-                contact.State.Equals(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
+            bool addMorePersons = true;
+
+            while (addMorePersons)
+            {
+                AddContact();
+
+                Console.WriteLine("Do you want to add another person? (y/n): ");
+                string choice = Console.ReadLine();
+
+                if (choice.ToLower() != "y")
+                {
+                    addMorePersons = false;
+                }
+            }
+        }
+        public void EnsureNoDuplicateEntries()
+        {
+            var distinctContacts = contacts.GroupBy(contact => contact.FirstName + contact.LastName)
+                .Select(group => group.First())
+                .ToList();
+
+            if (distinctContacts.Count != contacts.Count)
+            {
+                Console.WriteLine("Duplicate entries found. Removing duplicates...");
+                contacts = distinctContacts;
+            }
+            else
+            {
+                Console.WriteLine("No duplicate entries found.");
+            }
+
+            Console.WriteLine();
         }
 
+        public List<Contact> FindContactsByCityOrState(string searchQuery)
+        {
+            return contacts.Where(contact => contact.City.ToLower() == searchQuery.ToLower() || contact.State.ToLower() == searchQuery.ToLower())
+                .ToList();
+        }
         public Contact FindContactByName(string firstName, string lastName)
         {
-            return contacts.FirstOrDefault(contact =>
-                contact.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
-                contact.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+            return contacts.FirstOrDefault(contact => contact.FirstName.ToLower() == firstName.ToLower() && contact.LastName.ToLower() == lastName.ToLower());
+        }
+        public void SortContactsByName()
+        {
+            contacts = contacts.OrderBy(contact => contact.LastName).ThenBy(contact => contact.FirstName).ToList();
         }
     }
 }
