@@ -193,5 +193,9 @@ namespace AddressBook
         {
             contacts = contacts.OrderBy(contact => contact.Zip).ToList();
         }
+        public List<Contact> GetContacts()
+        {
+            return contacts;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace AddressBook
 {
@@ -338,5 +339,81 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+        
+        public void WriteAddressBookToFile()
+        {
+            Console.Write("Enter the name of the address book to write to a file: ");
+            string addressBookName = Console.ReadLine();
+
+            if (addressBooks.ContainsKey(addressBookName))
+            {
+               AddressBook addressBook = addressBooks[addressBookName];
+
+               Console.Write("Enter the file name to write the address book: ");
+               string fileName = Console.ReadLine();
+
+               try
+               {
+                   using (StreamWriter writer = new StreamWriter(fileName))
+                   {
+                      foreach (var contact in addressBook.GetContacts())
+                      {
+                        writer.WriteLine($"{contact.FirstName},{contact.LastName},{contact.Address},{contact.City},{contact.State},{contact.Zip},{contact.PhoneNumber},{contact.Email}");
+                      }
+                   }
+
+                   Console.WriteLine($"Address book written to {fileName}.");
+               }
+               catch (IOException ex)
+               {
+                  Console.WriteLine($"Error writing to file: {ex.Message}");
+               }
+            }
+            else
+            {
+               Console.WriteLine("Address book not found.");
+            }
+
+            Console.WriteLine();
+        }
+
+        public void ReadAddressBookFromFile()
+        {
+           Console.Write("Enter the file name to read the address book: ");
+           string fileName = Console.ReadLine();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(fileName))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        
+                        string[] fields = line.Split(',');
+
+                        string firstName = fields[0];
+                        string lastName = fields[1];
+                        string address = fields[2];
+                        string city = fields[3];
+                        string state = fields[4];
+                        string zip = fields[5];
+                        string phoneNumber = fields[6];
+                        string email = fields[7];
+
+                        
+                    }
+                }
+                Console.WriteLine("Address book read from file.");
+            }
+
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Error reading from file: {ex.Message}");
+            }
+
+            Console.WriteLine();
+        }
+
     }
 }

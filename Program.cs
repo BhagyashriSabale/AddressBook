@@ -9,6 +9,7 @@ namespace AddressBook
         {
             Console.WriteLine("Welcome Address Book");
             AddressBookSystem addressBookSystem = new AddressBookSystem();
+            AddressBook addressBook = new AddressBook();
 
             while (true)
             {
@@ -25,7 +26,8 @@ namespace AddressBook
                 Console.WriteLine("10. Get Count by State");
                 Console.WriteLine("11. Sort contact by name");
                 Console.WriteLine("12. Sort entries in addressbook by City, State, and ZIP");
-                Console.WriteLine("13. Exit");
+                Console.WriteLine("13. Read and Write AddressBook with person Contact");
+                Console.WriteLine("14. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -93,8 +95,29 @@ namespace AddressBook
                         }
 
                         break;
-
                     case 13:
+                        Console.WriteLine("File IO Menu:");
+                        Console.WriteLine("1. Write Address Book to a File");
+                        Console.WriteLine("2. Read Address Book from a File");
+                        Console.WriteLine("Enter your choice: ");
+                        int fileIOChoice = Convert.ToInt32(Console.ReadLine());
+
+                        switch (fileIOChoice)
+                        {
+                            case 1:
+                                addressBookSystem.WriteAddressBookToFile();
+                                break;
+                            case 2:
+                                addressBookSystem.ReadAddressBookFromFile();
+                                break;
+                            default:
+                                Console.WriteLine("Invalid choice. Please try again.");
+                                break;
+                        }
+
+                        break;
+
+                    case 14:
                         Environment.Exit(0);
                         break;
                     default:
@@ -103,5 +126,6 @@ namespace AddressBook
                 }
             }
         }
+        
     }
 }
