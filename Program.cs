@@ -4,86 +4,104 @@ namespace AddressBook
 {
     internal class Program
     {
-        
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome Address Book");
-            AddressBookMain addressBookMain = new AddressBookMain();
-            bool exit = false;
-            while (!exit)
+            AddressBookSystem addressBookSystem = new AddressBookSystem();
+
+            while (true)
             {
-                Console.WriteLine("Address Book Program");
-                Console.WriteLine("1. Create New Address Book");
-                Console.WriteLine("2. Add Contact to Address Book");
-                Console.WriteLine("3. View contact in Address Book");
-                Console.WriteLine("4. Edit Contact in Address Book");
-                Console.WriteLine("5. Delete Contact from Address Book");
-                Console.WriteLine("6. Add Multiple Persons to Address Book");
-                Console.WriteLine("7. Add Multiple Address Books to the System");
-                Console.WriteLine("8. Ensure No Duplicate Entries in Address Book");
-                Console.WriteLine("9. Search Person in City or State");
-                Console.WriteLine("10. View Persons by City");
-                Console.WriteLine("11. View Persons by State");
-                Console.WriteLine("12. Get count by City");
-                Console.WriteLine("13. Get count by State");
-                Console.WriteLine("14. Sort Address Book by Person's Name");
-                Console.WriteLine("15. Exit");
+                Console.WriteLine("Address Book System Menu:");
+                Console.WriteLine("1. Create Address Book");
+                Console.WriteLine("2. Add Contact");
+                Console.WriteLine("3. View Address Book");
+                Console.WriteLine("4. Edit Contact");
+                Console.WriteLine("5. Delete Contact");
+                Console.WriteLine("6. Search Person in City or State");
+                Console.WriteLine("7. View Persons by City");
+                Console.WriteLine("8. View Persons by State");
+                Console.WriteLine("9. Get Count by City");
+                Console.WriteLine("10. Get Count by State");
+                Console.WriteLine("11. Sort contact by name");
+                Console.WriteLine("12. Sort entries in addressbook by City, State, and ZIP");
+                Console.WriteLine("13. Exit");
                 Console.WriteLine("Enter your choice: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
+
                 switch (choice)
                 {
                     case 1:
-                        addressBookMain.CreateAddressBook();
+                        addressBookSystem.CreateAddressBook();
                         break;
                     case 2:
-                        addressBookMain.AddContact();
+                        addressBookSystem.AddContact();
                         break;
                     case 3:
-                        addressBookMain.ViewAddressBook();
+                        addressBookSystem.ViewAddressBook();
                         break;
                     case 4:
-                        addressBookMain.EditContact();
+                        addressBookSystem.EditContact();
                         break;
                     case 5:
-                        addressBookMain.DeleteContact();
+                        addressBookSystem.DeleteContact();
                         break;
                     case 6:
-                        addressBookMain.AddMultipleAddressBooks();
+                        addressBookSystem.SearchPersonInCityOrState();
                         break;
-                    case 7: 
-                        addressBookMain.AddMultiplePersons();
+                    case 7:
+                        addressBookSystem.ViewPersonsByCity();
                         break;
                     case 8:
-                        addressBookMain.EnsureNoDuplicateEntries();
+                        addressBookSystem.ViewPersonsByState();
                         break;
                     case 9:
-                        addressBookMain.SearchPersonInCityOrState();
+                        addressBookSystem.GetCountByCity();
                         break;
+                   
                     case 10:
-                        addressBookMain.ViewPersonsByCity();
+                        addressBookSystem.GetCountByState();
                         break;
+                    
                     case 11:
-                        addressBookMain.ViewPersonsByState();
+                        addressBookSystem.SortAddressBookByName();
                         break;
+
+                        
                     case 12:
-                        addressBookMain.GetCountByCity();
+                        Console.WriteLine("Sort Address Book Menu:");
+                        Console.WriteLine("1. Sort by City");
+                        Console.WriteLine("2. Sort by State");
+                        Console.WriteLine("3. Sort by ZIP");
+                        Console.WriteLine("Enter your choice: ");
+                        int sortChoice = Convert.ToInt32(Console.ReadLine());
+
+                        switch (sortChoice)
+                        {
+                            case 1:
+                                addressBookSystem.SortAddressBookByCity();
+                                break;
+                            case 2:
+                                addressBookSystem.SortAddressBookByState();
+                                break;
+                            case 3:
+                                addressBookSystem.SortAddressBookByZip();
+                                break;
+                            default:
+                                Console.WriteLine("Invalid choice. Please try again.");
+                                break;
+                        }
+
                         break;
+
                     case 13:
-                        addressBookMain.GetCountByState();
-                        break;
-                    case 14: 
-                        addressBookMain.SortAddressBook();
-                        break;
-                    case 15:
-                        exit = true;
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
                 }
-
             }
         }
-
     }
 }

@@ -50,6 +50,7 @@ namespace AddressBook
                 string firstName = Console.ReadLine();
                 Console.Write("Last Name: ");
                 string lastName = Console.ReadLine();
+
                 if (addressBook.FindContactByName(firstName, lastName) != null)
                 {
                     Console.WriteLine("Contact with the same name already exists in the address book.");
@@ -68,10 +69,12 @@ namespace AddressBook
                     string phoneNumber = Console.ReadLine();
                     Console.Write("Email: ");
                     string email = Console.ReadLine();
+
                     Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
                     addressBook.AddContact(contact);
 
-                    Console.WriteLine("Contact added to the address book.");
+                    UpdatePersonsByCityAndState(contact);
+                    Console.WriteLine("Contact added successfully.");
                 }
             }
             else
@@ -260,6 +263,80 @@ namespace AddressBook
                 personsByState[contact.State] = new List<Contact>();
             }
             personsByState[contact.State].Add(contact);
+        }
+        public void SortAddressBookByName()
+        {
+            Console.Write("Enter the name of the address book to sort: ");
+            string addressBookName = Console.ReadLine();
+
+            if (addressBooks.ContainsKey(addressBookName))
+            {
+                AddressBook addressBook = addressBooks[addressBookName];
+                addressBook.SortContactsByName();
+                Console.WriteLine("Address book sorted by name.");
+                addressBook.ViewAddressBook();
+            }
+            else
+            {
+                Console.WriteLine("Address book not found.");
+            }
+
+            Console.WriteLine();
+        }
+
+        public void SortAddressBookByCity()
+        {
+            Console.Write("Enter the name of the address book to sort by city: ");
+            string addressBookName = Console.ReadLine();
+
+            if (addressBooks.ContainsKey(addressBookName))
+            {
+                AddressBook addressBook = addressBooks[addressBookName];
+                addressBook.SortByCity();
+                Console.WriteLine("Address book sorted by city.");
+            }
+            else
+            {
+                Console.WriteLine("Address book not found.");
+            }
+
+            Console.WriteLine();
+        }
+        public void SortAddressBookByState()
+        {
+            Console.Write("Enter the name of the address book to sort by state: ");
+            string addressBookName = Console.ReadLine();
+
+            if (addressBooks.ContainsKey(addressBookName))
+            {
+                AddressBook addressBook = addressBooks[addressBookName];
+                addressBook.SortByState();
+                Console.WriteLine("Address book sorted by state.");
+            }
+            else
+            {
+                Console.WriteLine("Address book not found.");
+            }
+
+            Console.WriteLine();
+        }
+        public void SortAddressBookByZip()
+        {
+            Console.Write("Enter the name of the address book to sort by ZIP: ");
+            string addressBookName = Console.ReadLine();
+
+            if (addressBooks.ContainsKey(addressBookName))
+            {
+                AddressBook addressBook = addressBooks[addressBookName];
+                addressBook.SortByZip();
+                Console.WriteLine("Address book sorted by ZIP.");
+            }
+            else
+            {
+                Console.WriteLine("Address book not found.");
+            }
+
+            Console.WriteLine();
         }
     }
 }

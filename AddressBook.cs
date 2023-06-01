@@ -14,13 +14,14 @@ namespace AddressBook
         {
             contacts = new List<Contact>();
         }
+
         public void AddContact(Contact contact)
         {
             contacts.Add(contact);
         }
         public void AddContact()
         {
-            Console.WriteLine("Enter contact details:");
+            Console.WriteLine("Enter the contact details:");
             Console.Write("First Name: ");
             string firstName = Console.ReadLine();
             Console.Write("Last Name: ");
@@ -37,33 +38,39 @@ namespace AddressBook
             string phoneNumber = Console.ReadLine();
             Console.Write("Email: ");
             string email = Console.ReadLine();
+
             Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
             contacts.Add(contact);
 
-            Console.WriteLine("Contact added to the address book successfully.");
+            Console.WriteLine("Contact added successfully.");
             Console.WriteLine();
         }
 
         public void ViewAddressBook()
         {
-            if (contacts.Count == 0)
-            {
-                Console.WriteLine("Address book is empty.");
-            }
-            else
+            if (contacts.Count > 0)
             {
                 Console.WriteLine("Address Book:");
                 foreach (var contact in contacts)
                 {
                     Console.WriteLine($"Name: {contact.FirstName} {contact.LastName}");
-                    Console.WriteLine($"Address: {contact.Address} {contact.City} {contact.State}");
+                    Console.WriteLine($"Address: {contact.Address}");
+                    Console.WriteLine($"City: {contact.City}");
+                    Console.WriteLine($"State: {contact.State}");
                     Console.WriteLine($"ZIP: {contact.Zip}");
                     Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
                     Console.WriteLine($"Email: {contact.Email}");
                     Console.WriteLine();
                 }
             }
+            else
+            {
+                Console.WriteLine("Address book is empty.");
+            }
+
+            Console.WriteLine();
         }
+
         public void EditContact()
         {
             Console.WriteLine("Enter the name of the contact to edit:");
@@ -71,10 +78,11 @@ namespace AddressBook
             string firstName = Console.ReadLine();
             Console.Write("Last Name: ");
             string lastName = Console.ReadLine();
+
             Contact contact = FindContactByName(firstName, lastName);
             if (contact != null)
             {
-                Console.WriteLine("Enter new contact details:");
+                Console.WriteLine("Enter updated contact details:");
                 Console.Write("Address: ");
                 contact.Address = Console.ReadLine();
                 Console.Write("City: ");
@@ -88,14 +96,16 @@ namespace AddressBook
                 Console.Write("Email: ");
                 contact.Email = Console.ReadLine();
 
-                Console.WriteLine("Contact details updated successfully.");
+                Console.WriteLine("Contact updated successfully.");
             }
             else
             {
                 Console.WriteLine("Contact not found.");
             }
+
             Console.WriteLine();
         }
+
         public void DeleteContact()
         {
             Console.WriteLine("Enter the name of the contact to delete:");
@@ -103,6 +113,7 @@ namespace AddressBook
             string firstName = Console.ReadLine();
             Console.Write("Last Name: ");
             string lastName = Console.ReadLine();
+
             Contact contact = FindContactByName(firstName, lastName);
             if (contact != null)
             {
@@ -113,6 +124,7 @@ namespace AddressBook
             {
                 Console.WriteLine("Contact not found.");
             }
+
             Console.WriteLine();
         }
         public void AddMultiplePersons()
@@ -153,16 +165,33 @@ namespace AddressBook
 
         public List<Contact> FindContactsByCityOrState(string searchQuery)
         {
-            return contacts.Where(contact => contact.City.ToLower() == searchQuery.ToLower() || contact.State.ToLower() == searchQuery.ToLower())
-                .ToList();
+            return contacts.Where(contact =>
+                contact.City.Equals(searchQuery, StringComparison.OrdinalIgnoreCase) ||
+                contact.State.Equals(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
         }
+
         public Contact FindContactByName(string firstName, string lastName)
         {
-            return contacts.FirstOrDefault(contact => contact.FirstName.ToLower() == firstName.ToLower() && contact.LastName.ToLower() == lastName.ToLower());
+            return contacts.FirstOrDefault(contact => contact.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) && 
+            contact.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
         }
         public void SortContactsByName()
         {
             contacts = contacts.OrderBy(contact => contact.LastName).ThenBy(contact => contact.FirstName).ToList();
+        }
+        public void SortByCity()
+        {
+            contacts = contacts.OrderBy(contact => contact.City).ToList();
+        }
+
+        public void SortByState()
+        {
+            contacts = contacts.OrderBy(contact => contact.State).ToList();
+        }
+
+        public void SortByZip()
+        {
+            contacts = contacts.OrderBy(contact => contact.Zip).ToList();
         }
     }
 }

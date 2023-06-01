@@ -9,14 +9,12 @@ namespace AddressBook
     internal class AddressBookMain
     {
         private Dictionary<string, AddressBook> addressBooks;
-        private Dictionary<string, List<Contact>> personsByCity;
-        private Dictionary<string, List<Contact>> personsByState;
+
         public AddressBookMain()
         {
             addressBooks = new Dictionary<string, AddressBook>();
-            personsByCity = new Dictionary<string, List<Contact>>();
-            personsByState = new Dictionary<string, List<Contact>>();
         }
+
         public void CreateAddressBook()
         {
             Console.Write("Enter the name of the address book: ");
@@ -34,6 +32,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void AddContact()
         {
             Console.Write("Enter the name of the address book to add the contact: ");
@@ -43,23 +42,6 @@ namespace AddressBook
             {
                 AddressBook addressBook = addressBooks[addressBookName];
                 addressBook.AddContact();
-            }
-            else
-            {
-                Console.WriteLine("Address book not found.");
-            }
-
-            Console.WriteLine();
-        }
-        public void ViewAddressBook()
-        {
-            Console.Write("Enter the name of the address book to view: ");
-            string addressBookName = Console.ReadLine();
-
-            if (addressBooks.ContainsKey(addressBookName))
-            {
-                AddressBook addressBook = addressBooks[addressBookName];
-                addressBook.ViewAddressBook();
             }
             else
             {
@@ -86,6 +68,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void DeleteContact()
         {
             Console.Write("Enter the name of the address book to delete the contact: ");
@@ -103,6 +86,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void AddMultiplePersons()
         {
             Console.Write("Enter the name of the address book to add multiple persons: ");
@@ -120,6 +104,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void AddMultipleAddressBooks()
         {
             Console.Write("Enter the number of address books to add: ");
@@ -130,6 +115,7 @@ namespace AddressBook
                 CreateAddressBook();
             }
         }
+
         public void EnsureNoDuplicateEntries()
         {
             Console.Write("Enter the name of the address book to ensure no duplicate entries: ");
@@ -147,6 +133,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void SearchPersonInCityOrState()
         {
             Console.Write("Enter the city or state to search for persons: ");
@@ -175,6 +162,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
+
         public void ViewPersonsByCity()
         {
             Console.Write("Enter the city to view persons: ");
@@ -186,6 +174,7 @@ namespace AddressBook
             {
                 persons.AddRange(addressBook.FindContactsByCityOrState(city));
             }
+
             if (persons.Count > 0)
             {
                 Console.WriteLine($"Persons in {city}:");
@@ -214,6 +203,7 @@ namespace AddressBook
             {
                 persons.AddRange(addressBook.FindContactsByCityOrState(state));
             }
+
             if (persons.Count > 0)
             {
                 Console.WriteLine($"Persons in {state}:");
@@ -230,30 +220,7 @@ namespace AddressBook
 
             Console.WriteLine();
         }
-        public void GetCountByCity()
-        {
-            var cityCounts = personsByCity.ToDictionary(kv => kv.Key, kv => kv.Value.Count);
 
-            Console.WriteLine("Number of persons by city:");
-            foreach (var kvp in cityCounts)
-            {
-                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-            }
-
-            Console.WriteLine();
-        }
-        public void GetCountByState()
-        {
-            var stateCounts = personsByState.ToDictionary(kv => kv.Key, kv => kv.Value.Count);
-
-            Console.WriteLine("Number of persons by state:");
-            foreach (var kvp in stateCounts)
-            {
-                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-            }
-
-            Console.WriteLine();
-        }
         public void SortAddressBook()
         {
             Console.Write("Enter the name of the address book to sort: ");
